@@ -7,15 +7,13 @@ import org.springframework.data.domain.Pageable;
 
 public interface ToDoListService {
 
-    ToDoList save(ToDoList toDoList);
-
     ToDoListDto save(ToDoListDto toDoList);
 
-    ToDoList getById(Long id);
+    ToDoListDto getById(Long id);
 
     TPage<ToDoListDto> getAllPageable(Pageable pageable);
 
-    Boolean delete(ToDoListDto toDoList);
+    Boolean delete(Long toDoList);
 
-    Boolean delete(ToDoList toDoList);
+    ToDoListDto update(Long id, ToDoListDto project);
 }

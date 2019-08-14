@@ -24,11 +24,6 @@ public class ToDoListServiceImpl implements ToDoListService {
     }
 
     @Override
-    public ToDoList save(ToDoList toDoList) {
-        return ToDoListRepository.save(toDoList);
-    }
-
-    @Override
     public ToDoListDto save(ToDoListDto toDoList) {
         if (toDoList.getDate() == null)
             throw new IllegalArgumentException("ToDoList Date cannot be null");
@@ -40,26 +35,28 @@ public class ToDoListServiceImpl implements ToDoListService {
     }
 
     @Override
-    public ToDoList getById(Long id) {
-        return ToDoListRepository.getOne(id);
+    public ToDoListDto getById(Long id) {
+        ToDoList toDoList=ToDoListRepository.getOne(id);
+        return modelMapper.map(toDoList,ToDoListDto.class);
     }
 
     @Override
     public TPage<ToDoListDto> getAllPageable(Pageable pageable) {
-    Page<ToDoList> data=ToDoListRepository.findAll(pageable);
-    TPage page=new TPage<ToDoListDto>();
-    ToDoListDto[] dtos=modelMapper.map(data.getContent(),ToDoListDto[].class);
-    page.setStat(data, Arrays.asList(dtos));
-    return page;
+        Page<ToDoList> data = ToDoListRepository.findAll(pageable);
+        TPage page = new TPage<ToDoListDto>();
+        ToDoListDto[] dtos = modelMapper.map(data.getContent(), ToDoListDto[].class);
+        page.setStat(data, Arrays.asList(dtos));
+        return page;
     }
 
     @Override
-    public Boolean delete(ToDoListDto toDoList) {
-        return null;
+    public Boolean delete(Long toDoListId) {
+        ToDoListRepository.deleteById(toDoListId);
+        return true;
     }
 
     @Override
-    public Boolean delete(ToDoList toDoList) {
+    public ToDoListDto update(Long id, ToDoListDto project) {
         return null;
     }
 }
