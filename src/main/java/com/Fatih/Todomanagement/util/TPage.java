@@ -1,6 +1,6 @@
 package com.Fatih.Todomanagement.util;
 
-import com.Fatih.Todomanagement.Entity.ToDoList;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
 
